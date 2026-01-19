@@ -1,318 +1,86 @@
-/* Apple/Tesla theme overrides (load after base.css) */
-/* ===============================
-   Apple / Tesla Minimal UI Override
-   把品牌色降到最低：灰階 + 留白 + 乾淨邊框
-   =============================== */
+/* =========================
+   LUNY – Apple/Tesla Theme
+   Brand accent: #9e8678
+   Download buttons: #ed964e
+   ========================= */
 
+/* ---------- Brand Tokens ---------- */
 :root{
-  /* 灰階系統 */
-  --bg-page:#f5f5f7;       /* Apple-like page gray */
-  --bg-surface:#ffffff;
-  --bg-soft:#fafafa;
-
-  --ink:#111111;
-  --muted:#6b7280;
-  --muted-2:#9ca3af;
-
-  --line:rgba(0,0,0,.10);
-  --line-strong:rgba(0,0,0,.16);
-
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
-  --shadow-md: 0 10px 30px rgba(0,0,0,.08);
-
-  --radius:16px;
-  --radius-sm:12px;
-
-  /* 點綴色（極少使用） */
-  --accent:#0a84ff;        /* Apple blue */
-  --accent-weak: rgba(10,132,255,.14);
-  --danger:#ff3b30;
+  --brand-accent:#9e8678;
+  --brand-accent-dark:#8a7468;
+  --download-accent:#ed964e;
+  --download-accent-dark:#d85b2f;
+  --radius-pill:14px;
 }
 
-/* 背景降噪：移除彩色 radial */
-body{
-  background: var(--bg-page) !important;
-  color: var(--ink) !important;
+/* ---------- STEP Titles ---------- */
+.step-title,
+.step-header,
+.step h2,
+.step h3,
+h2.step,
+h3.step{
+  color:var(--brand-accent) !important;
+  font-weight:600;
 }
 
-/* 全域字體質感：更像 Apple UI */
-body, button, input, select{
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ---------- Download Buttons Style ---------- */
+.button-group,
+.download-group,
+.download-buttons,
+.actions,
+.controls .button-group{
+  display:flex !important;
+  gap:16px !important;
+  justify-content:center !important;
+  align-items:center !important;
+  flex-wrap:wrap !important;
 }
 
-/* 卡片：去掉品牌色邊框，改灰階細邊 + 乾淨陰影 */
-.form-container,
-.editor-card,
-.preview{
-  background: var(--bg-surface) !important;
-  border: 1px solid var(--line) !important;
-  box-shadow: var(--shadow-md) !important;
-  border-radius: var(--radius) !important;
-}
-
-/* 標題：黑字 + 字重層級 */
-.form-container h1,
-.preview h3,
-.editor-main-title{
-  color: var(--ink) !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.2px !important;
-}
-
-/* 次文字：統一灰階 */
-.form-note,
-.order-note,
-.legend,
-.download-note,
-.file-meta,
-.error-message{
-  color: var(--muted) !important;
-}
-
-/* ===== 表單欄位：Apple 風 ===== */
-.form-container label,
-.field-grid label{
-  color: var(--ink) !important;
-  opacity: .86;
-  font-weight: 700 !important;
-}
-
-.form-container select,
-.form-container input[type="number"],
-.field-grid select,
-.field-grid input[type="number"],
-.field-grid input[type="text"],
-.field-grid input[type="color"]{
-  background: #fff !important;
-  border: 1px solid var(--line) !important;
-  border-radius: 14px !important;
-  box-shadow: none !important;
-  color: var(--ink) !important;
-}
-
-.form-container select:focus,
-.form-container input[type="number"]:focus,
-.field-grid select:focus,
-.field-grid input[type="number"]:focus,
-.field-grid input[type="text"]:focus,
-.field-grid input[type="color"]:focus{
-  outline: none !important;
-  border-color: rgba(10,132,255,.45) !important;
-  box-shadow: 0 0 0 4px var(--accent-weak) !important;
-}
-
-/* ===== details panel：去掉咖色系，變成乾淨灰階 ===== */
-details.panel{
-  background: var(--bg-surface) !important;
-  border: 1px solid var(--line) !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-details.panel > summary{
-  color: var(--ink) !important;
-  font-weight: 800 !important;
-}
-
-details > summary:hover{
-  background: rgba(0,0,0,.03) !important;
-}
-
-/* summary 右側提示 pill：改為灰底細邊 */
-details > summary::after{
-  background: rgba(0,0,0,.04) !important;
-  border: 1px solid rgba(0,0,0,.10) !important;
-  color: var(--muted) !important;
-}
-
-/* chevron 顏色改灰 */
-details.panel > summary .chev{
-  color: var(--muted-2) !important;
-}
-
-/* ===== 上傳卡：更像 Apple 的簡潔區塊 ===== */
-.upload-card{
-  background: var(--bg-soft) !important;
-  border: 1px dashed rgba(0,0,0,.18) !important;
-}
-
-.upload-card:hover{
-  background: #fff !important;
-  border-color: rgba(0,0,0,.22) !important;
-}
-
-.btn-upload{
-  background: #fff !important;
-  border: 1px solid var(--line) !important;
-  color: var(--ink) !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-.btn-upload:hover{
-  border-color: rgba(10,132,255,.35) !important;
-  box-shadow: 0 0 0 4px var(--accent-weak) !important;
-}
-
-/* ===== 形狀按鈕：取消咖色 active，改為灰底 + 藍色 focus ring ===== */
-.shape-btn{
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  color: var(--ink) !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-.shape-btn:hover{
-  transform: translateY(-1px);
-}
-
-.shape-btn.active{
-  background: rgba(0,0,0,.03) !important;
-  border-color: rgba(0,0,0,.22) !important;
-  box-shadow: 0 0 0 4px rgba(10,132,255,.10) !important;
-  color: var(--ink) !important;
-}
-
-/* ===== 主要按鈕：Tesla/Apple 風（黑 + 白） ===== */
-.copy-btn{
-  background: #111 !important;
+.button-group > button,
+.button-group > a,
+.download-group > button,
+.download-group > a,
+.download-buttons > button,
+.download-buttons > a{
+  background:var(--download-accent) !important;
   color:#fff !important;
-  border: 1px solid rgba(0,0,0,.35) !important;
-  box-shadow: 0 12px 20px rgba(0,0,0,.18) !important;
-  border-radius: 14px !important;
+  border:none !important;
+  border-radius:var(--radius-pill) !important;
+  padding:14px 26px !important;
+  min-width:160px;
+  font-size:15px;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
 }
 
-.copy-btn:hover{ filter: brightness(1.05) !important; }
-.copy-btn:active{ transform: translateY(1px) !important; }
-
-/* 下單按鈕：黑底白字 */
-#orderLink{
- background:#8a7366;
-  color:#ffffff;
-  border:none;
+.button-group > button:hover,
+.button-group > a:hover,
+.download-group > button:hover,
+.download-group > a:hover,
+.download-buttons > button:hover,
+.download-buttons > a:hover{
+  background:var(--download-accent-dark) !important;
 }
 
-/* 結帳按鈕：白底黑字 */
+/* ---------- Main CTA: Add to Cart ---------- */
+#orderLink,
 #checkoutScrollBtn{
-  background:#fff !important;
-  color:#111 !important;
-  border:1px solid var(--line-strong) !important;
-  box-shadow: none !important;
-}
-
-/* ===== result / summary：去品牌黃底，改乾淨灰白 ===== */
-.result{
-  background: #fff !important;
-  border: 1px solid var(--line) !important;
-  color: var(--ink) !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-.summary{
-  background: #fff !important;
-  border: 1px solid var(--line) !important;
-  color: var(--ink) !important;
-}
-
-/* ===== 預覽 canvas 框：更乾淨 ===== */
-.preview canvas{
-  border: 1px solid var(--line) !important;
-  border-radius: 18px !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-/* ===== legend 顏色：弱化，避免太花 ===== */
-.legend .cut{ color: #ef4444 !important; }
-.legend .safe{ color: #22c55e !important; }
-.legend .bleed{ color: #9ca3af !important; }
-
-/* previewOrderArea：也改灰階 */
-#previewOrderArea > div{
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-/* 取消多餘品牌色 focus */
-a{ color: var(--accent) !important; }
-a:hover{ text-decoration: underline; }
-
-/* Primary CTA: true black */
-#orderLink{
-  background:#111 !important;
+  background:var(--brand-accent) !important;
   color:#fff !important;
-  border:1px solid rgba(0,0,0,.35) !important;
-  box-shadow: 0 12px 20px rgba(0,0,0,.18) !important;
-}
-#orderLink:hover{ filter: brightness(1.05) !important; }
-#orderLink:active{ transform: translateY(1px) !important; }
-
-#checkoutScrollBtn{
-  background:#fff !important;
-  color:#111 !important;
-  border:1px solid var(--line-strong) !important;
-  box-shadow:none !important;
-}
-#checkoutScrollBtn:hover{ background: rgba(0,0,0,.03) !important; }
-
-
-/* ===== Additional overrides for parts that still used brand gradients in base ===== */
-
-/* Step pills: neutral */
-.editor-step-pill{
-  border:1px solid var(--line) !important;
-  background: rgba(0,0,0,.02) !important;
-  color: var(--muted) !important;
-}
-.editor-step-pill.is-current{
-  background: #111 !important;
-  color:#fff !important;
-  border-color: rgba(0,0,0,.35) !important;
-  box-shadow: 0 12px 20px rgba(0,0,0,.18) !important;
+  border:none !important;
+  border-radius:var(--radius-pill) !important;
+  padding:16px 28px !important;
+  font-size:16px;
+  font-weight:700;
+  box-shadow:0 10px 22px rgba(0,0,0,.16) !important;
 }
 
-/* Details summary pill + hover: neutral */
-details > summary::after{
-  background: rgba(0,0,0,.04) !important;
-  border: 1px solid rgba(0,0,0,.10) !important;
-  color: var(--muted) !important;
+#orderLink:hover,
+#checkoutScrollBtn:hover{
+  background:var(--brand-accent-dark) !important;
 }
-details > summary:hover{
-  background: rgba(0,0,0,.03) !important;
-}
-
-/* Chip toggles */
-.chip-toggle{
-  border: 1px solid var(--line) !important;
-  background: #fff !important;
-  color: var(--ink) !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-.chip-toggle:hover{
-  border-color: rgba(10,132,255,.35) !important;
-  box-shadow: 0 0 0 4px var(--accent-weak) !important;
-}
-.chip-toggle[aria-pressed="true"]{
-  background:#111 !important;
-  color:#fff !important;
-  border-color: rgba(0,0,0,.35) !important;
-  box-shadow: 0 12px 20px rgba(0,0,0,.18) !important;
-}
-
-/* previewOrderArea inline cards (base had orange gradient with !important) */
-#previewOrderArea > div{
-  background:#fff !important;
-  border:1px solid var(--line) !important;
-  border-radius:14px !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-/* Label browns -> ink */
-.upload-title,
-details.panel > summary,
-.preview h3{
-  color: var(--ink) !important;
-}
-
-/* Any remaining links */
-a{ color: var(--accent) !important; }
-
