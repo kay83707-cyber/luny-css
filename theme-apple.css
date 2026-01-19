@@ -1,62 +1,74 @@
 /* =====================================================
    LUNY – Apple/Tesla Theme
-   PATCH (FINAL)
-   Scope STRICTLY LIMITED to:
-   1) STEP 1 / STEP 2 badge color
-   2) Download buttons style + ALIGNMENT
-   Everything else keeps original Apple/Tesla theme
+   PATCH (HROW)
+   Fixes:
+   - Download buttons stay in ONE ROW (desktop)
+   - Center aligned like bottom CTA
+   Scope:
+   - STEP badge color
+   - Download buttons only (by exact IDs / class)
    ===================================================== */
 
 /* ===== STEP badge only ===== */
 .step-badge{
   background:#9e8678 !important;
-  color:#ffffff !important;
+  color:#fff !important;
   font-weight:600 !important;
 }
 
-/* ===== Download buttons (exact IDs) ===== */
+/* ===== Download buttons style (exact IDs) ===== */
 #downloadPreview,
 #downloadOriginal{
   background:#ed964e !important;
-  color:#ffffff !important;
+  color:#fff !important;
   border:none !important;
   border-radius:14px !important;
-  padding:14px 26px !important;
-  min-width:220px !important;
+  padding:14px 20px !important;
   height:46px !important;
   font-size:15px !important;
   font-weight:700 !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
   box-shadow:0 6px 14px rgba(0,0,0,.12) !important;
   cursor:pointer !important;
+
+  /* Key: keep side-by-side without needing parent flex */
+  display:inline-block !important;
+  vertical-align:middle !important;
+  white-space:nowrap !important;
+  width:calc(50% - 10px) !important;
+  max-width:260px !important;
 }
 
-/* spacing between the two download buttons */
-#downloadPreview{ margin-right:16px !important; }
+/* Gap + center the pair */
+#downloadPreview{ margin:0 10px 0 0 !important; }
+#downloadOriginal{ margin:0 0 0 10px !important; }
 
-/* hover */
+/* If the original CSS makes them full width/block via class, override */
+.download-btn{
+  display:inline-block !important;
+  width:auto;
+}
+
+/* Center container (best-effort, harmless if not present) */
+.preview-footer,
+.preview-actions,
+.preview-controls,
+.download-wrap,
+.download-row{
+  text-align:center !important;
+}
+
 #downloadPreview:hover,
 #downloadOriginal:hover{
   filter:brightness(.95) !important;
 }
 
-/* ===== ALIGNMENT: same as bottom CTA ===== */
-/* force the container of download buttons to center */
-#downloadPreview,
-#downloadOriginal{
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-
-/* if wrapped in a parent container, center that container */
-#downloadPreview.parentNode,
-#downloadOriginal.parentNode{}
-
-/* fallback: center via common preview footer container */
-.preview-footer,
-.preview-actions,
-.preview-controls{
-  text-align:center !important;
+/* Mobile: allow stacking naturally when too narrow */
+@media (max-width: 420px){
+  #downloadPreview,
+  #downloadOriginal{
+    width:100% !important;
+    max-width:none !important;
+  }
+  #downloadPreview{ margin:0 0 10px 0 !important; }
+  #downloadOriginal{ margin:0 !important; }
 }
