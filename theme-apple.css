@@ -1,22 +1,54 @@
 /* =====================================================
-   LUNY – Apple/Tesla Theme
-   PATCH (HROW)
-   Fixes:
-   - Download buttons stay in ONE ROW (desktop)
-   - Center aligned like bottom CTA
-   Scope:
-   - STEP badge color
-   - Download buttons only (by exact IDs / class)
+   LUNY – PATCH (Apple/Tesla Reset + ONLY requested accents)
+   Goal:
+   1) 把頁面「全域品牌色」拉回 Apple/Tesla 灰階（避免整頁被品牌色套住）
+   2) 只保留你指定的：
+      - STEP 1 / STEP 2 badge：#9e8678
+      - 下載預覽圖 / 下載原圖：#ed964e（左右並排、置中）
+   ⚠️ 這是一個「補丁檔」：請放在所有 theme/base CSS 的最後面載入
    ===================================================== */
 
-/* ===== STEP badge only ===== */
+/* =========================
+   A) Global: reset common brand tokens to neutral (Apple/Tesla-ish)
+   你之前的 theme-apple.css 很可能把這些 token 設成品牌色，導致整頁都被染色。
+   ========================= */
+:root{
+  /* common tokens we saw in your CSS */
+  --primary-color:#111111 !important;
+  --primary-darker:#000000 !important;
+  --ink:#111111 !important;
+
+  /* neutrals */
+  --bg-page:#f5f5f5 !important;
+  --bg-surface:#ffffff !important;
+  --bg-soft:#ffffff !important;
+
+  --line:rgba(0,0,0,0.08) !important;
+  --line-strong:rgba(0,0,0,0.18) !important;
+}
+
+/* 如果某些元件直接吃 primary-color 當背景，強制改回灰階 */
+a.btn-primary,
+button.btn-primary{
+  background:#111 !important;
+  border-color:rgba(0,0,0,.18) !important;
+}
+
+/* =========================
+   B) ONLY: STEP badge (the pill)
+   ========================= */
 .step-badge{
   background:#9e8678 !important;
   color:#fff !important;
   font-weight:600 !important;
 }
 
-/* ===== Download buttons style (exact IDs) ===== */
+/* =========================
+   C) ONLY: Download buttons (exact IDs)
+   Required HTML:
+   <button id="downloadPreview" class="download-btn">...</button>
+   <button id="downloadOriginal" class="download-btn">...</button>
+   ========================= */
 #downloadPreview,
 #downloadOriginal{
   background:#ed964e !important;
@@ -27,48 +59,42 @@
   height:46px !important;
   font-size:15px !important;
   font-weight:700 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  white-space:nowrap !important;
   box-shadow:0 6px 14px rgba(0,0,0,.12) !important;
   cursor:pointer !important;
-
-  /* Key: keep side-by-side without needing parent flex */
-  display:inline-block !important;
-  vertical-align:middle !important;
-  white-space:nowrap !important;
-  width:calc(50% - 10px) !important;
-  max-width:260px !important;
+  min-width:220px !important;
 }
 
-/* Gap + center the pair */
-#downloadPreview{ margin:0 10px 0 0 !important; }
-#downloadOriginal{ margin:0 0 0 10px !important; }
-
-/* If the original CSS makes them full width/block via class, override */
-.download-btn{
-  display:inline-block !important;
-  width:auto;
-}
-
-/* Center container (best-effort, harmless if not present) */
-.preview-footer,
-.preview-actions,
-.preview-controls,
-.download-wrap,
-.download-row{
-  text-align:center !important;
-}
+#downloadPreview{ margin-right:16px !important; }
+#downloadOriginal{ margin-left:16px !important; }
 
 #downloadPreview:hover,
-#downloadOriginal:hover{
-  filter:brightness(.95) !important;
+#downloadOriginal:hover{ filter:brightness(.95) !important; }
+
+/* Ensure the pair is centered and in ONE ROW on desktop:
+   Use :has() to target the real parent container safely.
+   Chrome/Edge (modern) support it; if unsupported, it is ignored harmlessly.
+*/
+*:has(> #downloadPreview):has(> #downloadOriginal){
+  display:flex !important;
+  flex-direction:row !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:16px !important;
+  flex-wrap:nowrap !important;
 }
 
-/* Mobile: allow stacking naturally when too narrow */
+/* Mobile: allow stacking when too narrow */
 @media (max-width: 420px){
-  #downloadPreview,
-  #downloadOriginal{
-    width:100% !important;
-    max-width:none !important;
+  *:has(> #downloadPreview):has(> #downloadOriginal){
+    flex-direction:column !important;
+    gap:12px !important;
   }
-  #downloadPreview{ margin:0 0 10px 0 !important; }
-  #downloadOriginal{ margin:0 !important; }
+  #downloadPreview{ margin-right:0 !important; }
+  #downloadOriginal{ margin-left:0 !important; }
+  #downloadPreview,
+  #downloadOriginal{ min-width:0 !important; width:100% !important; }
 }
