@@ -1,44 +1,46 @@
 /* =========================
-   LUNY – Apple/Tesla Theme
-   Brand accent: #9e8678
-   Download buttons: #ed964e
+   LUNY – Apple/Tesla Theme (SAFE)
+   Only affects:
+   1) STEP titles
+   2) Download buttons
+   3) Add-to-cart buttons
    ========================= */
 
-/* ---------- Brand Tokens ---------- */
+/* ---------- Tokens ---------- */
 :root{
   --brand-accent:#9e8678;
   --brand-accent-dark:#8a7468;
+
   --download-accent:#ed964e;
   --download-accent-dark:#d85b2f;
+
   --radius-pill:14px;
 }
 
-/* ---------- STEP Titles ---------- */
+/* =========================
+   STEP TITLES (ONLY)
+   ========================= */
+/* 明確只打 STEP 標題，避免影響卡片、表單、預覽區 */
 .step-title,
 .step-header,
-.step h2,
-.step h3,
-h2.step,
-h3.step{
+.step-label,
+h2.step-title,
+h3.step-title{
   color:var(--brand-accent) !important;
-  font-weight:600;
+  font-weight:600 !important;
 }
 
-/* ---------- Download Buttons Style ---------- */
-.button-group,
-.download-group,
-.download-buttons,
-.actions,
-.controls .button-group{
-  display:flex !important;
-  gap:16px !important;
-  justify-content:center !important;
-  align-items:center !important;
-  flex-wrap:wrap !important;
+/* 若 STEP 是用固定文字區塊（保守） */
+.step-badge{
+  background:var(--brand-accent) !important;
+  color:#fff !important;
 }
 
-.button-group > button,
-.button-group > a,
+/* =========================
+   DOWNLOAD BUTTONS (ONLY)
+   僅限「下載預覽圖 / 下載原圖」
+   ========================= */
+/* ⚠️ 僅鎖定含 download 關鍵字的容器，避免波及其他 button-group */
 .download-group > button,
 .download-group > a,
 .download-buttons > button,
@@ -58,8 +60,6 @@ h3.step{
   box-shadow:0 6px 14px rgba(0,0,0,.12);
 }
 
-.button-group > button:hover,
-.button-group > a:hover,
 .download-group > button:hover,
 .download-group > a:hover,
 .download-buttons > button:hover,
@@ -67,7 +67,9 @@ h3.step{
   background:var(--download-accent-dark) !important;
 }
 
-/* ---------- Main CTA: Add to Cart ---------- */
+/* =========================
+   MAIN CTA – ADD TO CART ONLY
+   ========================= */
 #orderLink,
 #checkoutScrollBtn{
   background:var(--brand-accent) !important;
