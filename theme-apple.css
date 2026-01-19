@@ -1,22 +1,22 @@
 /* =====================================================
    LUNY – Apple/Tesla Theme
-   PATCH ONLY (SAFE)
-   Purpose:
-   1) ONLY change STEP 1 / STEP 2 badge color
-   2) ONLY change Download Preview / Download Original buttons
-   ⚠️ Does NOT touch any other UI
+   PATCH (FINAL)
+   Scope STRICTLY LIMITED to:
+   1) STEP 1 / STEP 2 badge color
+   2) Download buttons style + ALIGNMENT
+   Everything else keeps original Apple/Tesla theme
    ===================================================== */
 
-/* ===== STEP badge (only the pill) ===== */
+/* ===== STEP badge only ===== */
 .step-badge{
   background:#9e8678 !important;
   color:#ffffff !important;
   font-weight:600 !important;
 }
 
-/* ===== Download buttons (exact IDs from HTML) ===== */
-button#downloadPreview,
-button#downloadOriginal{
+/* ===== Download buttons (exact IDs) ===== */
+#downloadPreview,
+#downloadOriginal{
   background:#ed964e !important;
   color:#ffffff !important;
   border:none !important;
@@ -34,12 +34,29 @@ button#downloadOriginal{
 }
 
 /* spacing between the two download buttons */
-button#downloadPreview{
-  margin-right:16px !important;
+#downloadPreview{ margin-right:16px !important; }
+
+/* hover */
+#downloadPreview:hover,
+#downloadOriginal:hover{
+  filter:brightness(.95) !important;
 }
 
-/* hover effect */
-button#downloadPreview:hover,
-button#downloadOriginal:hover{
-  filter:brightness(.95) !important;
+/* ===== ALIGNMENT: same as bottom CTA ===== */
+/* force the container of download buttons to center */
+#downloadPreview,
+#downloadOriginal{
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* if wrapped in a parent container, center that container */
+#downloadPreview.parentNode,
+#downloadOriginal.parentNode{}
+
+/* fallback: center via common preview footer container */
+.preview-footer,
+.preview-actions,
+.preview-controls{
+  text-align:center !important;
 }
