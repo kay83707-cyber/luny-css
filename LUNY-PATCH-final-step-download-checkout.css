@@ -1,0 +1,96 @@
+/* =====================================================
+   LUNY PATCH (FINAL)
+   Apply AFTER theme-apple-clean.css
+   Scope: ONLY what you requested
+   1) STEP 1/2 badge color: #9e8678
+   2) Download buttons: #ed964e (horizontal, centered)
+   3) Checkout buttons:
+      - 加入購物車 (#orderLink): #9e8678 white text
+      - 立即結帳 (#checkoutScrollBtn): white bg black text
+   ===================================================== */
+
+:root{
+  --luny-brand:#9e8678;
+  --luny-brand-dark:#8a7468;
+  --luny-download:#ed964e;
+  --luny-download-dark:#d85b2f;
+}
+
+/* STEP badge only */
+.step-badge{
+  background:var(--luny-brand) !important;
+  color:#fff !important;
+  font-weight:600 !important;
+}
+
+/* Download buttons (exact IDs) */
+#downloadPreview,
+#downloadOriginal{
+  background:var(--luny-download) !important;
+  color:#fff !important;
+  border:none !important;
+  border-radius:16px !important;
+  height:48px !important;
+  padding:0 22px !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+  box-shadow:0 10px 22px rgba(0,0,0,.14) !important;
+  white-space:nowrap !important;
+}
+
+/* Force the parent that contains BOTH download buttons to be a horizontal row */
+*:has(> #downloadPreview):has(> #downloadOriginal){
+  display:flex !important;
+  flex-direction:row !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:16px !important;
+  flex-wrap:nowrap !important;
+  width:100% !important;
+}
+
+/* Mobile: stack */
+@media (max-width: 420px){
+  *:has(> #downloadPreview):has(> #downloadOriginal){
+    flex-direction:column !important;
+    gap:12px !important;
+  }
+  #downloadPreview, #downloadOriginal{
+    width:100% !important;
+    max-width:360px !important;
+  }
+}
+
+#downloadPreview:hover,
+#downloadOriginal:hover{
+  background:var(--luny-download-dark) !important;
+}
+
+/* Add to cart: brand solid */
+#orderLink{
+  background:var(--luny-brand) !important;
+  color:#fff !important;
+  border:none !important;
+  border-radius:16px !important;
+  height:52px !important;
+  padding:0 26px !important;
+  font-weight:800 !important;
+  box-shadow:0 12px 26px rgba(0,0,0,.16) !important;
+}
+#orderLink:hover{ background:var(--luny-brand-dark) !important; }
+
+/* Checkout: white bg black text */
+#checkoutScrollBtn{
+  background:#fff !important;
+  color:#111 !important;
+  border:1px solid rgba(0,0,0,.18) !important;
+  border-radius:16px !important;
+  height:52px !important;
+  padding:0 26px !important;
+  font-weight:800 !important;
+  box-shadow:0 10px 22px rgba(0,0,0,.10) !important;
+}
+#checkoutScrollBtn:hover{
+  background:#f6f6f6 !important;
+  border-color:rgba(0,0,0,.26) !important;
+}
